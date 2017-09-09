@@ -8,5 +8,7 @@ router.get('/version', (req, res) => {
 
 router.get('/profile-types', referenceController.getProfileTypes);
 
+router.get('/councils', referenceController.getCouncils);
+
 module.exports = router;
 
