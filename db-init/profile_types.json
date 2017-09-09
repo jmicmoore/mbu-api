@@ -1,0 +1,34 @@
+[
+  {
+    "value": "BoyScout",
+    "label": "Boy Scout"
+  },
+  {
+    "value": "VentureScout",
+    "label": "Venture Scout"
+  },
+  {
+    "value": "ScoutMaster",
+    "label": "Scout Master / Adult Leader"
+  },
+  {
+    "value": "CrewAdviser",
+    "label": "Crew Adviser / Adult Leader"
+  },
+  {
+    "value": "MeritBadgeCounselor",
+    "label": "Merit Badge Counselor"
+  },
+  {
+    "value": "YoungAdultInstructor",
+    "label": "Youth / Young Adult Instructor"
+  },
+  {
+    "value": "Parent",
+    "label": "Parent"
+  },
+  {
+    "value": "Staff",
+    "label": "Staff"
+  }
+]
