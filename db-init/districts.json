@@ -1,0 +1,86 @@
+[
+  {
+    "value": "BigMuddy",
+    "label": "Big Muddy"
+  },
+  {
+    "value": "BlackGold",
+    "label": "Black Gold"
+  },
+  {
+    "value": "BooneTrails",
+    "label": "Boone Trails"
+  },
+  {
+    "value": "CahokiaMounds",
+    "label": "Cahokia Mounds"
+  },
+  {
+    "value": "Cherokee",
+    "label": "Cherokee"
+  },
+  {
+    "value": "Egyptian",
+    "label": "Egyptian"
+  },
+  {
+    "value": "GrandTowers",
+    "label": "Grand Towers"
+  },
+  {
+    "value": "GravoisTrail",
+    "label": "Gravois Trail"
+  },
+  {
+    "value": "Kaskaskia",
+    "label": "Kaskaskia"
+  },
+  {
+    "value": "NewHorizons",
+    "label": "New Horizons"
+  },
+  {
+    "value": "NorthStar",
+    "label": "North Star"
+  },
+  {
+    "value": "Osage",
+    "label": "Osage"
+  },
+  {
+    "value": "OzarkTrailblazers",
+    "label": "Ozark Trailblazers"
+  },
+  {
+    "value": "Pathfinder",
+    "label": "Pathfinder"
+  },
+  {
+    "value": "PisaBird",
+    "label": "Pisa Bird"
+  },
+  {
+    "value": "RiverTrails",
+    "label": "River Trails"
+  },
+  {
+    "value": "Shawnee",
+    "label": "Shawnee"
+  },
+  {
+    "value": "Sioux",
+    "label": "Sioux"
+  },
+  {
+    "value": "StClair",
+    "label": "St. Clair"
+  },
+  {
+    "value": "Thunderbird",
+    "label": "Thunderbird"
+  },
+  {
+    "value": "Other",
+    "label": "Other"
+  }
+]

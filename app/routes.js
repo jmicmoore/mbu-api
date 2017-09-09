@@ -10,5 +10,7 @@ router.get('/profile-types', referenceController.getProfileTypes);
 
 router.get('/councils', referenceController.getCouncils);
 
+router.get('/districts', referenceController.getDistricts);
+
 module.exports = router;
 
