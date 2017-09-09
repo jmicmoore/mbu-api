@@ -1,0 +1,25 @@
+{
+  "name": "mbu-api",
+  "version": "0.0.0",
+  "description": "Mock API for Merit Badge University app",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "local": "NODE_ENV=development node ./server.js",
+    "server": "NODE_ENV=production node ./server.js",
+    "start": "npm run server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jmicmoore/mbu-api.git"
+  },
+  "author": "Jerry Moore <jmoor6@monsanto.com> (https://like.what.ever)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jmicmoore/mbu-api/issues"
+  },
+  "homepage": "https://github.com/jmicmoore/mbu-api#readme",
+  "dependencies": {
+    "express": "^4.15.3"
+  }
+}
