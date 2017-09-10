@@ -1,5 +1,6 @@
 require('dotenv').config(); // reads .env file
 const express = require('express');
+const bodyParser = require('body-parser');
 const app = express();
 const mongoose = require('mongoose');
 const routes = require('./app/routes');
@@ -32,8 +33,14 @@ mongoose.connect(mongoUrl, (err) => {
         next();
     });
 
+    // parse application/x-www-form-urlencoded
+    app.use(bodyParser.urlencoded({ extended: false }));
+
+    // parse application/json
+    app.use(bodyParser.json());
+
     app.use(baseUrl, routes);
     app.listen(port, function() {
-        console.log('MBU mock API listening on port: ', port);
+        console.log('MBU mock API listening on port:', port);
     });
 });
