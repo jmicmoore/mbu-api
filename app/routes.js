@@ -15,5 +15,7 @@ router.get('/districts', referenceController.getDistricts);
 
 router.post('/profiles', userController.createProfile);
 
+router.post('/login', userController.login);
+
 module.exports = router;
 
