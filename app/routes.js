@@ -13,6 +13,8 @@ router.get('/councils', referenceController.getCouncils);
 
 router.get('/districts', referenceController.getDistricts);
 
+router.get('/merit-badges', referenceController.getAllMeritBadges);
+
 router.post('/profiles', userController.createProfile);
 
 router.post('/login', userController.login);
