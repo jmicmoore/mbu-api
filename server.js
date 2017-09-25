@@ -1,4 +1,5 @@
 require('dotenv').config(); // reads .env file
+const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
@@ -38,6 +39,9 @@ mongoose.connect(mongoUrl, (err) => {
 
     // parse application/json
     app.use(bodyParser.json());
+
+    const imagePath = path.join(__dirname, 'app', 'images');
+    app.use(baseUrl + '/images', express.static(imagePath));
 
     app.use(baseUrl, routes);
     app.listen(port, function() {
