@@ -24,7 +24,7 @@ module.exports.login = (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
 
-    UserProfileModel.findOne({ email: email }).lean().exec(function (err, person) {
+    UserProfileModel.findOne({ email: email }).lean().exec( (err, person) => {
         if (err) {
             console.error('Error logging user in ', err);
             return res.status(403).send('Either e-mail or password was incorrect');
