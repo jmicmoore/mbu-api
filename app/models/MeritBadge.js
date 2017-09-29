@@ -5,12 +5,14 @@ const Schema = mongoose.Schema;
 
 const SubRequirement = new Schema({
     part: String,
-    description: String
+    text: String,
+    note: String
 });
 
 const Requirement = new Schema({
     number: Number,
     description: String,
+    note: String,
     subRequirements: [SubRequirement]
 });
 

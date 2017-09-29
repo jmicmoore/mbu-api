@@ -1,0 +1,82 @@
+{
+  "originalImageUrl": "https://meritbadge.org/wiki/index.php/Electronics",
+  "imageUrl": "/images/Electronics.jpg",
+  "name": "Electronics",
+  "eagleRequired": false,
+  "requirements": [
+    {
+      "number": 1,
+      "description": "Describe the safety precautions you must exercise when using, building, altering, or repairing electronic devices.",
+      "subRequirements": []
+    },
+    {
+      "number": 2,
+      "description": "Do the following:",
+      "subRequirements": [
+        {
+          "part": "a",
+          "text": "Draw a simple schematic diagram. It must show resistors, capacitors, and transistors or integrated circuits, Use the correct symbols. Label all parts."
+        },
+        {
+          "part": "b",
+          "text": "Tell the purpose of each part."
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "description": "Do the following:",
+      "subRequirements": [
+        {
+          "part": "a",
+          "text": "Show the right way to solder and desolder."
+        },
+        {
+          "part": "b",
+          "text": "Show how to avoid heat damage to electronic components."
+        },
+        {
+          "part": "c",
+          "text": "Tell about the function of a printed circuit board. Tell what precautions should be observed when soldering printed circuit boards."
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "description": "Discuss each of the following with your merit badge counselor, and then choose ONE of the following and build a circuit to show the techniques used:",
+      "note": "Show how to read the schematic diagram of the project you choose and, to the best of your ability, explain to your counselor how the circuit you built operates.",
+      "subRequirements": [
+        {
+          "part": "a",
+          "text": "Tell how you can use electronics for a control purpose, and then build a control device circuit."
+        },
+        {
+          "part": "b",
+          "text": "Tell about the basic principles of digital techniques, and then build a digital circuit. Show how to change three decimal numbers into binary numbers, and three binary numbers into decimal numbers."
+        },
+        {
+          "part": "c",
+          "text": "Tell about three audio applications of electronics, and then build an audio circuit."
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "description": "Do the following:",
+      "subRequirements": [
+        {
+          "part": "a",
+          "text": "Show how to solve a simple problem involving current, voltage, and resistance using Ohm's law."
+        },
+        {
+          "part": "b",
+          "text": "Tell about the need for and the use of test equipment in electronics. Name three types of test equipment. Tell how they operate."
+        },
+        {
+          "part": "c",
+          "text": "Find out about three career opportunities in electronics that interest you. Discuss with and explain to your counselor what training and education are needed for each position."
+        }
+      ]
+    }
+  ]
+}

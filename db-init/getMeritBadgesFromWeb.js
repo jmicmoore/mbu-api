@@ -1,25 +1,17 @@
+const _ = require('lodash');
 const fs = require('fs');
 const path = require('path');
-const _ = require('lodash');
 const cheerio = require('cheerio');
 const http = require('superagent');
 const async = require('async');
-const mongoose = require('mongoose');
-const MeritBadgeModel = require('../app/models/MeritBadge').MeritBadge;
-const RequirementModel = require('../app/models/MeritBadge').Requirement;
-const SubRequirementModel = require('../app/models/MeritBadge').SubRequirement;
 
-const MONGO_URL = 'mongodb://localhost/mbu-db';
 const MERIT_BADGE_LIST_URL = 'https://meritbadge.org/wiki/index.php/Merit_Badges';
 const BASE_URL = 'https://meritbadge.org';
 const IMAGE_RELATIVE_PATH = '/images';
 
-module.exports.loadMeritBadges = () => {
+module.exports.getMeritBadgesFromWeb = () => {
 
     async.waterfall([
-        (next) => {
-            connectToMongo(MONGO_URL, next);
-        },
         (next) => {
             console.log('Gathering merit badge urls...');
             getMeritBadgeInfoList(MERIT_BADGE_LIST_URL, next);
@@ -29,23 +21,17 @@ module.exports.loadMeritBadges = () => {
             console.log('Saving related images...');
             saveImages(meritBadges, next);
         },
-        convertToModels,
-        (meritBadgeModels, next) => {
-            console.log('Saving merit badges...');
-            saveMeritBadges(meritBadgeModels, next);
-        },
-        disconnectFromMongo
+        (meritBadges, next) => {
+            console.log('Saving merit badge json file...');
+            saveJsonFile(meritBadges, next);
+        }
     ], (err, result) => {
         if(err){
-            console.log("Error during merit badge load: ", err);
+            console.log("Error during merit badge load from web: ", err);
         } else {
-            console.log('Merit badges loaded successfully');
+            console.log('Merit badges loaded successfully from web');
         }
     });
-};
-
-const connectToMongo = (mongoUrl, next) => {
-    mongoose.connect(mongoUrl, next);
 };
 
 const getMeritBadgeInfoList = (url, next) => {
@@ -63,7 +49,7 @@ const getMeritBadgeInfoList = (url, next) => {
             const $ = cheerio.load(res.text);
 
             const badges = $("#bodyContent").find('ol').first().children('li');
-            const meritBadgeInfoList = badges.map(function(i, el){
+            let meritBadgeInfoList = badges.map(function(i, el){
                 return {
                     url: BASE_URL + $(this).find('a').attr('href').trim(),
                     eagleRequired: $(this).children().is('i'),
@@ -73,6 +59,27 @@ const getMeritBadgeInfoList = (url, next) => {
             next(null, meritBadgeInfoList);
         }
     });
+};
+
+const meritBadgeValid = (meritBadge) => {
+    let valid = true;
+    if(meritBadge.requirements.length <= 1){
+        console.log('Requirements did not parse correctly for ' + meritBadge.name);
+        valid = false;
+    }
+    try {
+        const jsonString = JSON.stringify(meritBadge);
+    } catch (err) {
+        console.log('Detected circular reference for ' + meritBadge.name, err);
+        valid = false;
+    }
+
+    if(valid){
+        console.log("Successfully parsed merit badge for: " + meritBadge.name);
+    } else {
+        console.log("Issues with parsing merit badge for: " + meritBadge.name + " - skipping");
+    }
+    return valid;
 };
 
 const getMeritBadges = (meritBadgeInfoList, next) => {
@@ -89,9 +96,11 @@ const getMeritBadges = (meritBadgeInfoList, next) => {
 
             meritBadge.name = meritBadgeInfo.name;
             meritBadge.eagleRequired = meritBadgeInfo.eagleRequired;
-            meritBadgeJsonList.push(meritBadge);
 
-            console.log("Parsed merit badge for: " + meritBadgeInfo.name);
+            if(meritBadgeValid(meritBadge)){
+                meritBadgeJsonList.push(meritBadge);
+            }
+
             eachCallback();
         });
     }, (err) => {
@@ -131,14 +140,14 @@ const getDataFromSite = (url, callback) => {
 const getRequirementsFromResponse = (html) => {
     const $ = cheerio.load(html);
 
-    const requirementsTable = $("#bodyContent").children('table').eq(3);
+    const requirementsTable = $("#toc").nextAll('table').eq(1);
 
     const getSubRequirements = function(element){
         return $(element).find('dd').map(function(i, el){
             const subRequirement = $(this).text().trim();
             return {
                 part: subRequirement.slice(0, 1),
-                description: subRequirement.slice(3)
+                text: subRequirement.slice(3)
             }
 
 
@@ -156,7 +165,7 @@ const getRequirementsFromResponse = (html) => {
                 description: description,
                 subRequirements: subRequirements
             };
-        });
+        }).get();
     };
 
     return getRequirements(requirementsTable);
@@ -190,39 +199,10 @@ const saveImages = (meritBadges, next) => {
     });
 };
 
-const convertToModels = (meritBadges, next) => {
-
-    const meritBadgeModels = _.map(meritBadges, meritBadge => {
-
-        const meritBadgeModel = new MeritBadgeModel(meritBadge);
-        meritBadgeModel.requirements = _.map(meritBadge.requirements, requirement => {
-
-            const requirementModel = new RequirementModel(requirement);
-            requirementModel.subRequirements = _.map(requirement.subRequirements, sub => {
-                return new SubRequirementModel(sub);
-            });
-            return requirementModel;
-
-        });
-        return meritBadgeModel;
-    });
-    next(null, meritBadgeModels);
+const saveJsonFile = (meritBadges, next) => {
+    const localFilepath = path.join(__dirname, 'meritBadges.json');
+    fs.writeFileSync(localFilepath, JSON.stringify(meritBadges), 'utf8');
+    next(null, meritBadges);
 };
 
-const saveMeritBadges = (meritBadgeModels, next) => {
-    MeritBadgeModel.insertMany(meritBadgeModels, function(err, docs) {
-        if(err){
-            next(err);
-        } else {
-            next(null);
-        }
-    });
-};
-
-const disconnectFromMongo = (next) => {
-    mongoose.connection.close((err) => {
-        next(err);
-    });
-};
-
-this.loadMeritBadges();
+this.getMeritBadgesFromWeb();
