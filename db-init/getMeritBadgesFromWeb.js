@@ -114,6 +114,21 @@ const getMeritBadges = (meritBadgeInfoList, next) => {
 
 };
 
+const mapImageName = (originalFileName) => {
+    switch(originalFileName){
+        case '200px-Mining_in_Society.jpg':
+            return 'Mining_in_Society.jpg';
+        case '200px-Scuba_Diving.jpg':
+            return 'Scuba_Diving.jpg';
+        case '200px-Signs%2C_Signals%2C_and_Codes.jpg':
+            return 'Signs_Signals_and_Codes.jpg';
+        case 'Search_%26_Rescue.jpg':
+            return 'Search_and_Rescue.jpg';
+        default:
+            return originalFileName;
+    };
+}
+
 const getDataFromSite = (url, callback) => {
     http.get(url).end(function(err, res){
         if(err){
@@ -125,7 +140,8 @@ const getDataFromSite = (url, callback) => {
             }
 
             const originalImageUrl = getImageFromResponse(res.text);
-            const filename = originalImageUrl.slice(originalImageUrl.lastIndexOf('/')+1);
+            const originalFilename = originalImageUrl.slice(originalImageUrl.lastIndexOf('/')+1);
+            const filename = mapImageName(originalFilename);
 
             const meritBadge = {
                 requirements: getRequirementsFromResponse(res.text),
