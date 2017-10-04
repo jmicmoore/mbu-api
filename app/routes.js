@@ -21,6 +21,7 @@ router.put('/merit-badges/:id', adminController.updateMeritBadge);
 router.delete('/merit-badges/:id', adminController.deleteMeritBadge);
 
 router.post('/classrooms', adminController.createClassroom);
+router.delete('/classrooms/:id', adminController.deleteClassroom);
 
 router.post('/profiles', userController.createProfile);
 

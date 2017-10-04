@@ -30,9 +30,9 @@ module.exports.updateMeritBadge = (req, res) => {
 };
 
 module.exports.deleteMeritBadge = (req, res) => {
-    const meritBadge = req.body;
+    const meritBadgeId = req.params.id;
 
-    MeritBadgeModel.findByIdAndDelete(meritBadge.id, (err) => {
+    MeritBadgeModel.findByIdAndRemove(meritBadgeId, (err) => {
         if(err){
             console.log('Error deleting Merit Badge: ', err);
             res.status(500).send('Error deleting Merit Badge');
@@ -52,6 +52,19 @@ module.exports.createClassroom = (req, res) => {
             res.status(500).send('Error saving Classroom');
         } else {
             res.status(200).send('Classroom saved successfully');
+        }
+    });
+};
+
+module.exports.deleteClassroom = (req, res) => {
+    const classroomId = req.params.id;
+
+    ClassroomModel.findByIdAndRemove(classroomId, (err) => {
+        if(err){
+            console.log('Error deleting Classroom: ', err);
+            res.status(500).send('Error deleting Classroom');
+        } else {
+            res.status(200).send('Classroom deleted successfully');
         }
     });
 };
