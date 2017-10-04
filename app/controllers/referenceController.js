@@ -2,6 +2,7 @@ const profileTypes = require('../../db-init/profile_types.json');
 const councils = require('../../db-init/councils.json');
 const districts = require('../../db-init/districts.json');
 const MeritBadgeModel = require('../models/MeritBadge').MeritBadge;
+const ClassroomModel = require('../models/Classroom');
 const factory = require('../models/modelFactory');
 
 module.exports.getProfileTypes = (req, res) => {
@@ -34,6 +35,17 @@ module.exports.getMeritBadge = (req, res) => {
             res.status(500).send('Error getting Merit Badge');
         } else {
             res.status(200).send(meritBadge);
+        }
+    });
+};
+
+module.exports.getAllClassrooms = (req, res) => {
+    ClassroomModel.find({}).lean().exec( (err, classrooms) => {
+        if(err){
+            console.log('Error getting classrooms: ', err);
+            res.status(500).send('Error getting classrooms');
+        } else {
+            res.status(200).send(classrooms);
         }
     });
 };

@@ -13,6 +13,7 @@ router.get('/councils', referenceController.getCouncils);
 router.get('/districts', referenceController.getDistricts);
 router.get('/merit-badges', referenceController.getAllMeritBadges);
 router.get('/merit-badges/:id', referenceController.getMeritBadge);
+router.get('/classrooms', referenceController.getAllClassrooms);
 
 
 router.post('/merit-badges', adminController.createMeritBadge);
