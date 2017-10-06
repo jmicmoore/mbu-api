@@ -17,6 +17,15 @@ var UserProfile = new Schema({
     selectedDistrict: String,
     otherDistrict: String,
 
+    // counselor info
+    address: String,
+    city: String,
+    selectedState: String,
+    zip: String,
+    phone: String,
+    youthProtectionTrained: Boolean,
+    ypTrainingDate: Date,
+
     created: {
         type: Date,
         default: Date.now

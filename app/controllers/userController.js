@@ -19,6 +19,37 @@ module.exports.createProfile = (req, res) => {
 
 };
 
+module.exports.updateProfile = (req, res) => {
+    if (!req.is('application/json')) {
+        return res.status(406).send({
+            message: 'Only json content is acceptable'
+        })
+    }
+
+    const userProfile = req.body;
+    UserProfileModel.findByIdAndUpdate(userProfile._id, userProfile, (err, doc) => {
+        if(err){
+            console.log('Error updating user profile: ', err);
+            res.status(500).send('Error updating user profile');
+        } else {
+            res.status(200).send('User profile updated successfully');
+        }
+    });
+};
+
+module.exports.getProfile = (req, res) => {
+    const email = req.params.email;
+
+    UserProfileModel.findOne({email: email}).lean().exec( (err, userProfile) => {
+        if(err){
+            console.log('Error getting user profile: ', err);
+            res.status(500).send('Error getting user profile');
+        } else {
+            res.status(200).send(userProfile);
+        }
+    });
+};
+
 module.exports.login = (req, res) => {
 
     const email = req.body.email;

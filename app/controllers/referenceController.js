@@ -1,6 +1,7 @@
 const profileTypes = require('../../db-init/profile_types.json');
 const councils = require('../../db-init/councils.json');
 const districts = require('../../db-init/districts.json');
+const states = require('../../db-init/states.json');
 const MeritBadgeModel = require('../models/MeritBadge').MeritBadge;
 const ClassroomModel = require('../models/Classroom');
 const factory = require('../models/modelFactory');
@@ -15,6 +16,10 @@ module.exports.getCouncils = (req, res) => {
 
 module.exports.getDistricts = (req, res) => {
     res.status(200).send(districts);
+};
+
+module.exports.getStates = (req, res) => {
+    res.status(200).send(states);
 };
 
 module.exports.getAllMeritBadges = (req, res) => {

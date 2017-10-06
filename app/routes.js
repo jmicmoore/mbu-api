@@ -11,6 +11,8 @@ router.get('/version', (req, res) => {
 router.get('/profile-types', referenceController.getProfileTypes);
 router.get('/councils', referenceController.getCouncils);
 router.get('/districts', referenceController.getDistricts);
+router.get('/states', referenceController.getStates);
+
 router.get('/merit-badges', referenceController.getAllMeritBadges);
 router.get('/merit-badges/:id', referenceController.getMeritBadge);
 router.get('/classrooms', referenceController.getAllClassrooms);
@@ -24,6 +26,8 @@ router.post('/classrooms', adminController.createClassroom);
 router.delete('/classrooms/:id', adminController.deleteClassroom);
 
 router.post('/profiles', userController.createProfile);
+router.put('/profiles', userController.updateProfile);
+router.get('/profiles/:email', userController.getProfile);
 
 router.post('/login', userController.login);
 
