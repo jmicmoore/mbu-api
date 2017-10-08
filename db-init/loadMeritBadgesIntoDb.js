@@ -3,7 +3,25 @@ const async = require('async');
 const mongoose = require('mongoose');
 const factory = require('../app/models/modelFactory');
 const MeritBadgeModel = require('../app/models/MeritBadge').MeritBadge;
-const meritBadges = require('./meritBadges.json');
+const autoParsedMeritBadges = require('./meritBadges.json');
+
+const architecture = require('./problemBadges/Architecture.json');
+const electronics = require('./problemBadges/Electronics.json');
+const geocaching = require('./problemBadges/Geocaching.json');
+const inventing = require('./problemBadges/Inventing.json');
+const metalwork = require('./problemBadges/Metalwork.json');
+const railroading = require('./problemBadges/Railroading.json');
+const scoutingHeritage = require('./problemBadges/Scouting Heritage.json');
+
+const problemBadges = [
+    architecture,
+    electronics,
+    geocaching,
+    inventing,
+    metalwork,
+    railroading,
+    scoutingHeritage
+];
 
 const MONGO_URL = 'mongodb://localhost/mbu-db';
 
@@ -14,8 +32,9 @@ module.exports.loadMeritBadgesIntoDb = () => {
             connectToMongo(MONGO_URL, next);
         },
         (next) => {
-            convertToModels(meritBadges, next);
+            combineJsonFiles(autoParsedMeritBadges, problemBadges, next);
         },
+        convertToModels,
         (meritBadgeModels, next) => {
             console.log('Saving merit badges...');
             saveMeritBadges(meritBadgeModels, next);
@@ -32,6 +51,11 @@ module.exports.loadMeritBadgesIntoDb = () => {
 
 const connectToMongo = (mongoUrl, next) => {
     mongoose.connect(mongoUrl, next);
+};
+
+const combineJsonFiles = (autoParsedMeritBadges, problemBadges, next) => {
+    const allMeritBadges = autoParsedMeritBadges.concat(problemBadges);
+    next(null, allMeritBadges);
 };
 
 const convertToModels = (meritBadges, next) => {
