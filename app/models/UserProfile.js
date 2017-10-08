@@ -20,11 +20,14 @@ var UserProfile = new Schema({
     // counselor info
     address: String,
     city: String,
-    selectedState: String,
+    state: String,
     zip: String,
     phone: String,
     youthProtectionTrained: Boolean,
     ypTrainingDate: Date,
+    timeAvailable: String,
+    maxNumberOfClasses: String,
+    meritBadges: [String],
 
     created: {
         type: Date,

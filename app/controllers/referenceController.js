@@ -33,6 +33,17 @@ module.exports.getAllMeritBadges = (req, res) => {
     });
 };
 
+module.exports.getMeritBadgeNames = (req, res) => {
+    MeritBadgeModel.find({}, 'name').lean().exec( (err, meritBadgeNames) => {
+        if(err){
+            console.log('Error getting Merit Badge names: ', err);
+            res.status(500).send('Error getting Merit Badge names');
+        } else {
+            res.status(200).send(meritBadgeNames);
+        }
+    });
+};
+
 module.exports.getMeritBadge = (req, res) => {
     MeritBadgeModel.findById(req.params.id).lean().exec( (err, meritBadge) => {
         if(err){

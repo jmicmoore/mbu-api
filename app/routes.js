@@ -12,6 +12,7 @@ router.get('/profile-types', referenceController.getProfileTypes);
 router.get('/councils', referenceController.getCouncils);
 router.get('/districts', referenceController.getDistricts);
 router.get('/states', referenceController.getStates);
+router.get('/merit-badge-names', referenceController.getMeritBadgeNames)
 
 router.get('/merit-badges', referenceController.getAllMeritBadges);
 router.get('/merit-badges/:id', referenceController.getMeritBadge);
