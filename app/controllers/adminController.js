@@ -1,6 +1,7 @@
 const MeritBadgeModel = require('../models/MeritBadge').MeritBadge;
 const ClassroomModel = require('../models/Classroom');
 const factory = require('../models/modelFactory');
+const MbuClassModel = require('../models/MbuClass');
 
 module.exports.createMeritBadge = (req, res) => {
     const meritBadge = req.body;
@@ -65,6 +66,20 @@ module.exports.deleteClassroom = (req, res) => {
             res.status(500).send('Error deleting Classroom');
         } else {
             res.status(200).send('Classroom deleted successfully');
+        }
+    });
+};
+
+module.exports.createClass = (req, res) => {
+    const mbuClass = req.body;
+
+    const model = new MbuClassModel(req.body);
+    model.save( (err, doc) => {
+        if(err){
+            console.log('Error saving Class: ', err);
+            res.status(500).send('Error saving Class');
+        } else {
+            res.status(200).send('Class saved successfully');
         }
     });
 };

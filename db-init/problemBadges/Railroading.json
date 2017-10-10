@@ -5,24 +5,6 @@
   "eagleRequired": false,
   "requirements": [
     {
-      "number": 9,
-      "description": "xxx",
-      "subRequirements": [
-        {
-          "part": "a",
-          "text": "xxx"
-        },
-        {
-          "part": "b",
-          "text": "xxx"
-        },
-        {
-          "part": "c",
-          "text": "xxx"
-        }
-      ]
-    },
-    {
       "number": 1,
       "description": "Do THREE of the following:",
       "subRequirements": [

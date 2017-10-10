@@ -15,16 +15,18 @@ router.get('/states', referenceController.getStates);
 router.get('/merit-badge-names', referenceController.getMeritBadgeNames)
 
 router.get('/merit-badges', referenceController.getAllMeritBadges);
-router.get('/merit-badges/:id', referenceController.getMeritBadge);
-router.get('/classrooms', referenceController.getAllClassrooms);
+router.get('/merit-badges/:name', referenceController.getMeritBadgeByName);
 
 
 router.post('/merit-badges', adminController.createMeritBadge);
 router.put('/merit-badges/:id', adminController.updateMeritBadge);
 router.delete('/merit-badges/:id', adminController.deleteMeritBadge);
 
+router.get('/classrooms', referenceController.getAllClassrooms);
 router.post('/classrooms', adminController.createClassroom);
 router.delete('/classrooms/:id', adminController.deleteClassroom);
+
+router.post('/classes', adminController.createClass);
 
 router.post('/profiles', userController.createProfile);
 router.put('/profiles', userController.updateProfile);

@@ -44,8 +44,8 @@ module.exports.getMeritBadgeNames = (req, res) => {
     });
 };
 
-module.exports.getMeritBadge = (req, res) => {
-    MeritBadgeModel.findById(req.params.id).lean().exec( (err, meritBadge) => {
+module.exports.getMeritBadgeByName = (req, res) => {
+    MeritBadgeModel.findOne({name: req.params.name}).lean().exec( (err, meritBadge) => {
         if(err){
             console.log('Error getting Merit Badge: ', err);
             res.status(500).send('Error getting Merit Badge');
