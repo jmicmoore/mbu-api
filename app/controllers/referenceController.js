@@ -4,6 +4,7 @@ const districts = require('../../db-init/districts.json');
 const states = require('../../db-init/states.json');
 const MeritBadgeModel = require('../models/MeritBadge').MeritBadge;
 const ClassroomModel = require('../models/Classroom');
+const MbuClassModel = require('../models/MbuClass');
 const factory = require('../models/modelFactory');
 
 module.exports.getProfileTypes = (req, res) => {
@@ -62,6 +63,17 @@ module.exports.getAllClassrooms = (req, res) => {
             res.status(500).send('Error getting classrooms');
         } else {
             res.status(200).send(classrooms);
+        }
+    });
+};
+
+module.exports.getClasses = (req, res) => {
+    MbuClassModel.find({}).lean().exec( (err, classes) => {
+        if(err){
+            console.log('Error getting classes: ', err);
+            res.status(500).send('Error getting classes');
+        } else {
+            res.status(200).send(classes);
         }
     });
 };

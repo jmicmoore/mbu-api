@@ -5,12 +5,14 @@ const Schema = mongoose.Schema;
 
 const MbuClass = new Schema({
 
-    counselor: String,
     meritBadge: String,
     recommendedLength: String,
     recommendedSize: String,
     notes: String,
+    numRequirements: Number,
+    imageUrl: String,
     preRequisites: [String],
+    counselors: [String],
 
     created: {
         type: Date,
