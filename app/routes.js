@@ -27,6 +27,7 @@ router.post('/classrooms', adminController.createClassroom);
 router.delete('/classrooms/:id', adminController.deleteClassroom);
 
 router.post('/classes', adminController.createClass);
+router.delete('/classes/:id', adminController.deleteClass);
 router.get('/classes', referenceController.getClasses);
 
 router.post('/profiles', userController.createProfile);

@@ -83,3 +83,16 @@ module.exports.createClass = (req, res) => {
         }
     });
 };
+
+module.exports.deleteClass = (req, res) => {
+    const classId = req.params.id;
+
+    MbuClassModel.findByIdAndRemove(classId, (err) => {
+        if(err){
+            console.log('Error deleting Class: ', err);
+            res.status(500).send('Error deleting Class');
+        } else {
+            res.status(200).send('Class deleted successfully');
+        }
+    });
+};
