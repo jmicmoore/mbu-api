@@ -6,6 +6,7 @@ const Schema = mongoose.Schema;
 const MbuClass = new Schema({
 
     meritBadge: String,
+    eagleRequired: Boolean,
     recommendedLength: String,
     recommendedSize: String,
     notes: String,
