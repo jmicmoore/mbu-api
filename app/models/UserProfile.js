@@ -21,7 +21,7 @@ var UserProfile = new Schema({
     state: String,
     zip: String,
     phone: String,
-    contactMethod: String,
+    contactMethod: [String],
     youthProtectionTrained: Boolean,
     ypTrainingDate: Date,
     timeAvailable: String,
