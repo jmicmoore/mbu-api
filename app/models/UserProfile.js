@@ -25,7 +25,7 @@ var UserProfile = new Schema({
     youthProtectionTrained: Boolean,
     ypTrainingDate: Date,
     timeAvailable: String,
-    maxNumberOfClasses: String,
+    maxNumberOfCourses: String,
     meritBadges: [String],
 
     created: {

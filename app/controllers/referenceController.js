@@ -4,7 +4,7 @@ const districts = require('../../db-init/districts.json');
 const states = require('../../db-init/states.json');
 const MeritBadgeModel = require('../models/MeritBadge').MeritBadge;
 const ClassroomModel = require('../models/Classroom');
-const MbuClassModel = require('../models/MbuClass');
+const MbuClassModel = require('../models/Course');
 const factory = require('../models/modelFactory');
 
 module.exports.getProfileTypes = (req, res) => {

@@ -3,17 +3,20 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const MbuClass = new Schema({
+const Course = new Schema({
 
-    meritBadge: String,
-    eagleRequired: Boolean,
+
     recommendedLength: String,
     recommendedSize: String,
     notes: String,
     numRequirements: Number,
-    imageUrl: String,
     preRequisites: [String],
     counselors: [String],
+
+    // fields from MeritBadge
+    meritBadge: String,
+    eagleRequired: Boolean,
+    imageUrl: String,
 
     created: {
         type: Date,
@@ -27,4 +30,4 @@ const MbuClass = new Schema({
     lastModifiedBy : String,
 });
 
-module.exports = mongoose.model('MbuClass', MbuClass);
+module.exports = mongoose.model('Course', Course);

@@ -1,7 +1,7 @@
 const MeritBadgeModel = require('../models/MeritBadge').MeritBadge;
 const ClassroomModel = require('../models/Classroom');
 const factory = require('../models/modelFactory');
-const MbuClassModel = require('../models/MbuClass');
+const CourseModel = require('../models/Course');
 
 module.exports.createMeritBadge = (req, res) => {
     const meritBadge = req.body;
@@ -44,8 +44,6 @@ module.exports.deleteMeritBadge = (req, res) => {
 };
 
 module.exports.createClassroom = (req, res) => {
-    const classroom = req.body;
-
     const model = new ClassroomModel(req.body);
     model.save( (err, doc) => {
         if(err){
@@ -70,29 +68,27 @@ module.exports.deleteClassroom = (req, res) => {
     });
 };
 
-module.exports.createClass = (req, res) => {
-    const mbuClass = req.body;
-
-    const model = new MbuClassModel(req.body);
+module.exports.createCourse = (req, res) => {
+    const model = new CourseModel(req.body);
     model.save( (err, doc) => {
         if(err){
-            console.log('Error saving Class: ', err);
-            res.status(500).send('Error saving Class');
+            console.log('Error saving Course: ', err);
+            res.status(500).send('Error saving Course');
         } else {
-            res.status(200).send('Class saved successfully');
+            res.status(200).send('Course saved successfully');
         }
     });
 };
 
-module.exports.deleteClass = (req, res) => {
-    const classId = req.params.id;
+module.exports.deleteCourse = (req, res) => {
+    const courseId = req.params.id;
 
-    MbuClassModel.findByIdAndRemove(classId, (err) => {
+    CourseModel.findByIdAndRemove(courseId, (err) => {
         if(err){
-            console.log('Error deleting Class: ', err);
-            res.status(500).send('Error deleting Class');
+            console.log('Error deleting Course: ', err);
+            res.status(500).send('Error deleting Course');
         } else {
-            res.status(200).send('Class deleted successfully');
+            res.status(200).send('Course deleted successfully');
         }
     });
 };

@@ -26,9 +26,9 @@ router.get('/classrooms', referenceController.getAllClassrooms);
 router.post('/classrooms', adminController.createClassroom);
 router.delete('/classrooms/:id', adminController.deleteClassroom);
 
-router.post('/classes', adminController.createClass);
-router.delete('/classes/:id', adminController.deleteClass);
-router.get('/classes', referenceController.getClasses);
+router.post('/courses', adminController.createCourse);
+router.delete('/courses/:id', adminController.deleteCourse);
+router.get('/courses', referenceController.getClasses);
 
 router.post('/profiles', userController.createProfile);
 router.put('/profiles', userController.updateProfile);
