@@ -1,39 +1,43 @@
 const express = require('express');
 const router = express.Router();
 const referenceController = require('./controllers/referenceController');
-const adminController = require('./controllers/adminController');
+const meritBadgeController = require('./controllers/meritBadgeController');
+const classroomController = require('./controllers/classroomController');
+const courseController = require('./controllers/courseController');
 const userController = require('./controllers/userController');
 
 router.get('/version', (req, res) => {
     res.status(200).send('1.2.3');
 });
 
+// Reference
 router.get('/profile-types', referenceController.getProfileTypes);
 router.get('/councils', referenceController.getCouncils);
 router.get('/districts', referenceController.getDistricts);
 router.get('/states', referenceController.getStates);
-router.get('/merit-badge-names', referenceController.getMeritBadgeNames)
 
-router.get('/merit-badges', referenceController.getAllMeritBadges);
-router.get('/merit-badges/:name', referenceController.getMeritBadgeByName);
+// Merit Badges
+router.get('/merit-badge-names', meritBadgeController.getMeritBadgeNames)
+router.get('/merit-badges', meritBadgeController.getAllMeritBadges);
+router.get('/merit-badges/:name', meritBadgeController.getMeritBadgeByName);
+router.post('/merit-badges', meritBadgeController.createMeritBadge);
+router.put('/merit-badges/:id', meritBadgeController.updateMeritBadge);
+router.delete('/merit-badges/:id', meritBadgeController.deleteMeritBadge);
 
+// Classrooms
+router.get('/classrooms', classroomController.getAllClassrooms);
+router.post('/classrooms', classroomController.createClassroom);
+router.delete('/classrooms/:id', classroomController.deleteClassroom);
 
-router.post('/merit-badges', adminController.createMeritBadge);
-router.put('/merit-badges/:id', adminController.updateMeritBadge);
-router.delete('/merit-badges/:id', adminController.deleteMeritBadge);
+// Courses
+router.post('/courses', courseController.createCourse);
+router.delete('/courses/:id', courseController.deleteCourse);
+router.get('/courses', courseController.getCourses);
 
-router.get('/classrooms', referenceController.getAllClassrooms);
-router.post('/classrooms', adminController.createClassroom);
-router.delete('/classrooms/:id', adminController.deleteClassroom);
-
-router.post('/courses', adminController.createCourse);
-router.delete('/courses/:id', adminController.deleteCourse);
-router.get('/courses', referenceController.getClasses);
-
+// Users
 router.post('/profiles', userController.createProfile);
 router.put('/profiles', userController.updateProfile);
 router.get('/profiles/:email', userController.getProfile);
-
 router.post('/login', userController.login);
 
 module.exports = router;
