@@ -1,3 +1,5 @@
+const _ = require('lodash');
+const mongoose = require('mongoose');
 const CourseModel = require('../models/Course');
 
 module.exports.getCourses = (req, res) => {
@@ -11,14 +13,27 @@ module.exports.getCourses = (req, res) => {
     });
 };
 
-module.exports.createCourse = (req, res) => {
-    const model = new CourseModel(req.body);
-    model.save( (err, doc) => {
+module.exports.getCourseById = (req, res) => {
+    const courseId = req.params.id;
+    CourseModel.findById(courseId).lean().exec( (err, course) => {
         if(err){
-            console.log('Error saving Course: ', err);
-            res.status(500).send('Error saving Course');
+            console.log('Error getting course by id: ', err);
+            res.status(500).send('Error getting course by id');
         } else {
-            res.status(200).send('Course saved successfully');
+            res.status(200).send(course);
+        }
+    });
+};
+
+module.exports.updateCourse = (req, res) => {
+    const course = req.body;
+    const courseId = course._id || new mongoose.Types.ObjectId;
+    CourseModel.findByIdAndUpdate(courseId, course, {upsert: true}, (err, doc) => {
+        if(err){
+            console.log('Error updating Course: ', err);
+            res.status(500).send('Error updating Course');
+        } else {
+            res.status(200).send('Course updated successfully');
         }
     });
 };

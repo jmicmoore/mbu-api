@@ -17,11 +17,11 @@ router.get('/districts', referenceController.getDistricts);
 router.get('/states', referenceController.getStates);
 
 // Merit Badges
-router.get('/merit-badge-names', meritBadgeController.getMeritBadgeNames)
+router.get('/merit-badge-names', meritBadgeController.getMeritBadgeNames);
 router.get('/merit-badges', meritBadgeController.getAllMeritBadges);
 router.get('/merit-badges/:name', meritBadgeController.getMeritBadgeByName);
 router.post('/merit-badges', meritBadgeController.createMeritBadge);
-router.put('/merit-badges/:id', meritBadgeController.updateMeritBadge);
+router.put('/merit-badges', meritBadgeController.updateMeritBadge);
 router.delete('/merit-badges/:id', meritBadgeController.deleteMeritBadge);
 
 // Classrooms
@@ -30,9 +30,10 @@ router.post('/classrooms', classroomController.createClassroom);
 router.delete('/classrooms/:id', classroomController.deleteClassroom);
 
 // Courses
-router.post('/courses', courseController.createCourse);
-router.delete('/courses/:id', courseController.deleteCourse);
+router.get('/courses/:id', courseController.getCourseById);
 router.get('/courses', courseController.getCourses);
+router.put('/courses', courseController.updateCourse);
+router.delete('/courses/:id', courseController.deleteCourse);
 
 // Users
 router.post('/profiles', userController.createProfile);
