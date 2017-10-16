@@ -5,9 +5,9 @@ const Schema = mongoose.Schema;
 
 const ScheduledCourse = new Schema({
 
+    courseName: String,
     classroom: String,
     period: String,
-    courseName: String,
     counselor: String,
 
     // fields from Course
