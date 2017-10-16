@@ -50,6 +50,17 @@ module.exports.getProfile = (req, res) => {
     });
 };
 
+module.exports.getCounselorNames = (req, res) => {
+    UserProfileModel.find({profileType: 'MeritBadgeCounselor'}, 'firstName lastName').lean().exec( (err, counselors) => {
+        if(err){
+            console.log('Error getting counselors: ', err);
+            res.status(500).send('Error getting counselors');
+        } else {
+            res.status(200).send(counselors);
+        }
+    });
+};
+
 module.exports.login = (req, res) => {
 
     const email = req.body.email;

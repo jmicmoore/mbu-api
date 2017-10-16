@@ -39,6 +39,7 @@ router.delete('/courses/:id', courseController.deleteCourse);
 router.post('/profiles', userController.createProfile);
 router.put('/profiles', userController.updateProfile);
 router.get('/profiles/:email', userController.getProfile);
+router.get('/counselor-names', userController.getCounselorNames);
 router.post('/login', userController.login);
 
 module.exports = router;

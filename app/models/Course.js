@@ -5,7 +5,6 @@ const Schema = mongoose.Schema;
 
 const Course = new Schema({
 
-
     recommendedLength: String,
     recommendedSize: String,
     notes: String,
