@@ -37,8 +37,9 @@ router.put('/courses', courseController.updateCourse);
 router.delete('/courses/:id', courseController.deleteCourse);
 
 // Scheduled Courses
+router.get('/scheduled-courses/:id', scheduledCourseController.getScheduledCourseById);
 router.get('/scheduled-courses', scheduledCourseController.getScheduledCourses);
-router.post('/scheduled-courses', scheduledCourseController.createScheduledCourse);
+router.put('/scheduled-courses', scheduledCourseController.updateScheduledCourse);
 router.delete('/scheduled-courses/:id', scheduledCourseController.deleteScheduledCourse);
 
 // Users

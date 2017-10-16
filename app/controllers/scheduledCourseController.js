@@ -1,17 +1,5 @@
+const mongoose = require('mongoose');
 const ScheduledCourseModel = require('../models/ScheduledCourse');
-
-module.exports.createScheduledCourse = (req, res) => {
-    const course = req.body;
-    var model = new ScheduledCourseModel(req.body);
-    model.save(course, (err, doc) => {
-        if(err){
-            console.log('Error saving Scheduled Course: ', err);
-            res.status(500).send('Error saving Scheduled Course');
-        } else {
-            res.status(200).send('Scheduled Course saved successfully');
-        }
-    });
-};
 
 module.exports.getScheduledCourses = (req, res) => {
     ScheduledCourseModel.find({}).lean().exec( (err, courses) => {
@@ -20,6 +8,31 @@ module.exports.getScheduledCourses = (req, res) => {
             res.status(500).send('Error getting scheduled courses');
         } else {
             res.status(200).send(courses);
+        }
+    });
+};
+
+module.exports.getScheduledCourseById = (req, res) => {
+    const courseId = req.params.id;
+    ScheduledCourseModel.findById(courseId).lean().exec( (err, course) => {
+        if(err){
+            console.log('Error getting scheduled course by id: ', err);
+            res.status(500).send('Error getting scheduled course by id');
+        } else {
+            res.status(200).send(course);
+        }
+    });
+};
+
+module.exports.updateScheduledCourse = (req, res) => {
+    const scheduledCourse = req.body;
+    const scheduledCourseId = scheduledCourse._id || new mongoose.Types.ObjectId;
+    ScheduledCourseModel.findByIdAndUpdate(scheduledCourseId, scheduledCourse, {upsert: true}, (err, doc) => {
+        if(err){
+            console.log('Error updating Scheduled Course: ', err);
+            res.status(500).send('Error updating Scheduled Course');
+        } else {
+            res.status(200).send('Scheduled Course updated successfully');
         }
     });
 };
