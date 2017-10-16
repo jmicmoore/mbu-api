@@ -4,6 +4,7 @@ const referenceController = require('./controllers/referenceController');
 const meritBadgeController = require('./controllers/meritBadgeController');
 const classroomController = require('./controllers/classroomController');
 const courseController = require('./controllers/courseController');
+const scheduledCourseController = require('./controllers/scheduledCourseController');
 const userController = require('./controllers/userController');
 
 router.get('/version', (req, res) => {
@@ -34,6 +35,9 @@ router.get('/courses/:id', courseController.getCourseById);
 router.get('/courses', courseController.getCourses);
 router.put('/courses', courseController.updateCourse);
 router.delete('/courses/:id', courseController.deleteCourse);
+
+// Scheduled Courses
+router.post('/scheduled-courses', scheduledCourseController.createScheduledCourse);
 
 // Users
 router.post('/profiles', userController.createProfile);
