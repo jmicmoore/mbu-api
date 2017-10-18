@@ -58,17 +58,17 @@ module.exports.login = (req, res) => {
     UserProfileModel.findOne({ userId: userId }).lean().exec( (err, person) => {
         if (err) {
             console.error('Error logging user in ', err);
-            return res.status(403).send('Either userId or password was incorrect');
+            return res.status(403).send('Either username or password was incorrect');
         }
 
         if(!person){
             console.error('UserId "' + userId + '" was not found.');
-            return res.status(403).send('Either userId or password was incorrect');
+            return res.status(403).send('Either username or password was incorrect');
         }
 
         if(person.password !== password){
             console.error('User with Id "' + userId + '" has incorrect password.');
-            return res.status(403).send('Either userId or password was incorrect');
+            return res.status(403).send('Either username or password was incorrect');
         }
         const safePerson = _.omit(person, ['userId', 'password']);
         return res.status(200).send(safePerson);
@@ -82,6 +82,23 @@ module.exports.getCounselorNames = (req, res) => {
             res.status(500).send('Error getting counselors');
         } else {
             res.status(200).send(counselors);
+        }
+    });
+};
+
+module.exports.validateUniqueUserId = (req, res, next) => {
+    const userId = req.body.userId;
+
+    UserProfileModel.findOne({userId: userId}).lean().exec( (err, userProfile) => {
+        if(err){
+            console.log('Error validating unique userId: ', err);
+            res.status(500).send('Unexpected error');
+        } else {
+            if(userProfile){
+                res.status(409).send('This username is already taken');
+            } else {
+                next();
+            }
         }
     });
 };
