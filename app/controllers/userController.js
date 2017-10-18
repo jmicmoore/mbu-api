@@ -37,16 +37,41 @@ module.exports.updateProfile = (req, res) => {
     });
 };
 
-module.exports.getProfile = (req, res) => {
-    const email = req.params.email;
+module.exports.getProfileByUserId = (req, res) => {
+    const userId = req.params.userId;
 
-    UserProfileModel.findOne({email: email}).lean().exec( (err, userProfile) => {
+    UserProfileModel.findOne({userId: userId}).lean().exec( (err, userProfile) => {
         if(err){
             console.log('Error getting user profile: ', err);
             res.status(500).send('Error getting user profile');
         } else {
             res.status(200).send(userProfile);
         }
+    });
+};
+
+module.exports.login = (req, res) => {
+
+    const userId = req.body.userId;
+    const password = req.body.password;
+
+    UserProfileModel.findOne({ userId: userId }).lean().exec( (err, person) => {
+        if (err) {
+            console.error('Error logging user in ', err);
+            return res.status(403).send('Either userId or password was incorrect');
+        }
+
+        if(!person){
+            console.error('UserId "' + userId + '" was not found.');
+            return res.status(403).send('Either userId or password was incorrect');
+        }
+
+        if(person.password !== password){
+            console.error('User with Id "' + userId + '" has incorrect password.');
+            return res.status(403).send('Either userId or password was incorrect');
+        }
+        const safePerson = _.omit(person, ['userId', 'password']);
+        return res.status(200).send(safePerson);
     });
 };
 
@@ -58,30 +83,5 @@ module.exports.getCounselorNames = (req, res) => {
         } else {
             res.status(200).send(counselors);
         }
-    });
-};
-
-module.exports.login = (req, res) => {
-
-    const email = req.body.email;
-    const password = req.body.password;
-
-    UserProfileModel.findOne({ email: email }).lean().exec( (err, person) => {
-        if (err) {
-            console.error('Error logging user in ', err);
-            return res.status(403).send('Either e-mail or password was incorrect');
-        }
-
-        if(!person){
-            console.error('User with e-mail "' + email + '" was not found.');
-            return res.status(403).send('Either e-mail or password was incorrect');
-        }
-
-        if(person.password !== password){
-            console.error('User with e-mail "' + email + '" has incorrect password.');
-            return res.status(403).send('Either e-mail or password was incorrect');
-        }
-        const safePerson = _.omit(person, ['password', 'passwordConfirm']);
-        return res.status(200).send(safePerson);
     });
 };

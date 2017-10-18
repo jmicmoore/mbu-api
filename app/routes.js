@@ -45,7 +45,7 @@ router.delete('/scheduled-courses/:id', scheduledCourseController.deleteSchedule
 // Users
 router.post('/profiles', userController.createProfile);
 router.put('/profiles', userController.updateProfile);
-router.get('/profiles/:email', userController.getProfile);
+router.get('/profiles/:userId', userController.getProfileByUserId);
 router.get('/counselor-names', userController.getCounselorNames);
 router.post('/login', userController.login);
 

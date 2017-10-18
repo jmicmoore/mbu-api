@@ -5,10 +5,12 @@ var Schema = mongoose.Schema;
 
 var UserProfile = new Schema({
 
+    userId: String,
+    password: String,
+
     firstName: String,
     lastName: String,
     email: String,
-    password: String,
     profileType: String,
     council: String,
     otherCouncil: String,
