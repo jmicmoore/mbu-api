@@ -1,4 +1,4 @@
-const profileTypes = require('../../db-init/profile_types.json');
+const profileTypes = require('../../db-init/profileTypes.json');
 const councils = require('../../db-init/councils.json');
 const districts = require('../../db-init/districts.json');
 const states = require('../../db-init/states.json');
