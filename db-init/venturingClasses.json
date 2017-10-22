@@ -1,0 +1,22 @@
+[
+  {
+    "value": "ILSC",
+    "label": "Introduction to Leadership Skills for Crews"
+  },
+  {
+    "value": "GoalSetting",
+    "label": "Venturing Goal Setting Training Module"
+  },
+  {
+    "value": "TimeManagement",
+    "label": "Venturing Time Management Training Module"
+  },
+  {
+    "value": "ProjectManagement",
+    "label": "Project Management"
+  },
+  {
+    "value": "Mentoring",
+    "label": "Mentoring for Venturing"
+  }
+]

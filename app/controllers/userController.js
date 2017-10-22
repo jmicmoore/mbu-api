@@ -23,11 +23,14 @@ module.exports.updateProfile = (req, res) => {
     if (!req.is('application/json')) {
         return res.status(406).send({
             message: 'Only json content is acceptable'
-        })
+        });
     }
 
     const userProfile = req.body;
-    UserProfileModel.findByIdAndUpdate(userProfile._id, userProfile, (err, doc) => {
+    const userProfileId = userProfile._id || new mongoose.Types.ObjectId;
+    userProfile.lastModified = new Date();
+
+    UserProfileModel.findByIdAndUpdate(userProfileId, userProfile, {upsert: true}, (err, doc) => {
         if(err){
             console.log('Error updating user profile: ', err);
             res.status(500).send('Error updating user profile');

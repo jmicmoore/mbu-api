@@ -27,6 +27,8 @@ module.exports.getScheduledCourseById = (req, res) => {
 module.exports.updateScheduledCourse = (req, res) => {
     const scheduledCourse = req.body;
     const scheduledCourseId = scheduledCourse._id || new mongoose.Types.ObjectId;
+    scheduledCourse.lastModified = new Date();
+
     ScheduledCourseModel.findByIdAndUpdate(scheduledCourseId, scheduledCourse, {upsert: true}, (err, doc) => {
         if(err){
             console.log('Error updating Scheduled Course: ', err);

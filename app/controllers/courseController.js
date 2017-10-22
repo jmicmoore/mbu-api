@@ -27,6 +27,8 @@ module.exports.getCourseById = (req, res) => {
 module.exports.updateCourse = (req, res) => {
     const course = req.body;
     const courseId = course._id || new mongoose.Types.ObjectId;
+    course.lastModified = new Date();
+
     CourseModel.findByIdAndUpdate(courseId, course, {upsert: true}, (err, doc) => {
         if(err){
             console.log('Error updating Course: ', err);

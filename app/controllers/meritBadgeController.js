@@ -50,8 +50,10 @@ module.exports.createMeritBadge = (req, res) => {
 
 module.exports.updateMeritBadge = (req, res) => {
     const meritBadge = req.body;
+    const meritBadgeId = meritBadge._id || new mongoose.Types.ObjectId;
+    meritBadge.lastModified = new Date();
 
-    MeritBadgeModel.findByIdAndUpdate(meritBadge._id, meritBadge, (err, doc) => {
+    MeritBadgeModel.findByIdAndUpdate(meritBadgeId, meritBadge, {upsert: true}, (err, doc) => {
         if(err){
             console.log('Error updating Merit Badge: ', err);
             res.status(500).send('Error updating Merit Badge');

@@ -20,7 +20,11 @@ var UserProfile = new Schema({
     district: String,
     otherDistrict: String,
 
-    // counselor info
+    // instructor shared
+    timeAvailable: String,
+    maxNumberOfCourses: String,
+
+    // counselor specific
     address: String,
     city: String,
     state: String,
@@ -29,9 +33,10 @@ var UserProfile = new Schema({
     contactMethods: [String],
     youthProtectionTrained: Boolean,
     ypTrainingDate: Date,
-    timeAvailable: String,
-    maxNumberOfCourses: String,
     meritBadges: [String],
+
+    // venturer instructor specific
+    venturingClasses: [String],
 
     created: {
         type: Date,

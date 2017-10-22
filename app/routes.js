@@ -6,6 +6,7 @@ const classroomController = require('./controllers/classroomController');
 const courseController = require('./controllers/courseController');
 const scheduledCourseController = require('./controllers/scheduledCourseController');
 const userController = require('./controllers/userController');
+const venturingController = require('./controllers/venturingController');
 
 router.get('/version', (req, res) => {
     res.status(200).send('1.2.3');
@@ -24,6 +25,9 @@ router.get('/merit-badges/:name', meritBadgeController.getMeritBadgeByName);
 router.post('/merit-badges', meritBadgeController.createMeritBadge);
 router.put('/merit-badges', meritBadgeController.updateMeritBadge);
 router.delete('/merit-badges/:id', meritBadgeController.deleteMeritBadge);
+
+// Venturing Classes
+router.get('/venturing-classes', venturingController.getClasses);
 
 // Classrooms
 router.get('/classrooms', classroomController.getAllClassrooms);
