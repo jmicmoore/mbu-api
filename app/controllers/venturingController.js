@@ -1,5 +1,5 @@
-const venturingClasses = require('../../db-init/venturingClasses.json');
+const venturingClassNames = require('../../db-init/venturingClassNames.json');
 
-module.exports.getClasses = (req, res) => {
-    res.status(200).send(venturingClasses);
+module.exports.getClassNames = (req, res) => {
+    res.status(200).send(venturingClassNames);
 };

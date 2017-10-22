@@ -4,13 +4,15 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const Course = new Schema({
-
+    // common
     recommendedLength: String,
     recommendedSize: String,
     notes: String,
+    teachers: [String],
+
+    // merit badge specific
     numRequirements: Number,
     preRequisites: [String],
-    counselors: [String],
 
     // fields from MeritBadge
     meritBadge: String,

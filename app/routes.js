@@ -27,7 +27,7 @@ router.put('/merit-badges', meritBadgeController.updateMeritBadge);
 router.delete('/merit-badges/:id', meritBadgeController.deleteMeritBadge);
 
 // Venturing Classes
-router.get('/venturing-classes', venturingController.getClasses);
+router.get('/venturing-class-names', venturingController.getClassNames);
 
 // Classrooms
 router.get('/classrooms', classroomController.getAllClassrooms);
