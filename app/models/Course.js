@@ -20,6 +20,9 @@ const Course = new Schema({
     eagleRequired: Boolean,
     imageUrl: String,
 
+    // venturing specific
+    venturingClass: String,
+
     created: {
         type: Date,
         default: Date.now
