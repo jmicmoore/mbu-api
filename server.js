@@ -1,4 +1,6 @@
 require('dotenv').config(); // reads .env file
+const fs = require('fs');
+const https = require('https');
 const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -6,7 +8,22 @@ const app = express();
 const mongoose = require('mongoose');
 const routes = require('./app/routes');
 
+const keyfilesPath = process.env.KEYFILES_PATH;
+const privateKey = fs.readFileSync( path.join(keyfilesPath, 'mbu-server-key.pem'));
+const publicCert = fs.readFileSync( path.join(keyfilesPath, 'mbu-fullchain-cert.pem'));
+const clientCert = fs.readFileSync( path.join(keyfilesPath, 'mbu-fullchain-cert.pem'));
+const passphrase = process.env.SERVER_KEY_PASSPHRASE;
+const sslOptions = {
+    key: privateKey,
+    passphrase: passphrase,
+    cert: publicCert,
+    requestCert: true,
+    ca: [ clientCert ]
+};
+
 const port = process.env.PORT || 3099;
+const securePort = process.env.SECURE_PORT || 8443;
+
 const mongoUrl =  process.env.MONGO_URL || 'mongodb://127.0.0.1:27017/mbu-db';
 const baseUrl = '/mbu-api';
 
@@ -29,7 +46,7 @@ mongoose.connect(mongoUrl, (err) => {
         });
     }
 
-    app.use((req, res, next) =>{
+    app.use((req, res, next) => {
         console.info("userId=" + req.userId + ", Method=" + req.method + ", Request=" + req.protocol + "://" + req.get('host') + req.originalUrl);
         next();
     });
@@ -44,7 +61,8 @@ mongoose.connect(mongoUrl, (err) => {
     app.use(baseUrl + '/images', express.static(imagePath));
 
     app.use(baseUrl, routes);
-    app.listen(port, function() {
-        console.log('MBU mock API listening on port:', port);
+
+    https.createServer(sslOptions, app).listen(securePort, () => {
+        console.log('MBU API listening on port:', securePort);
     });
 });

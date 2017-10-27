@@ -7,9 +7,10 @@ const courseController = require('./controllers/courseController');
 const scheduledCourseController = require('./controllers/scheduledCourseController');
 const userController = require('./controllers/userController');
 const venturingController = require('./controllers/venturingController');
+const packageJson = require('../package.json');
 
 router.get('/version', (req, res) => {
-    res.status(200).send('1.2.3');
+    res.status(200).send(packageJson.version);
 });
 
 // Reference
