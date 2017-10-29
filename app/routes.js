@@ -5,6 +5,7 @@ const meritBadgeController = require('./controllers/meritBadgeController');
 const classroomController = require('./controllers/classroomController');
 const courseController = require('./controllers/courseController');
 const scheduledCourseController = require('./controllers/scheduledCourseController');
+const userProfileController = require('./controllers/userProfileController');
 const userController = require('./controllers/userController');
 const venturingController = require('./controllers/venturingController');
 const packageJson = require('../package.json');
@@ -47,14 +48,20 @@ router.get('/scheduled-courses', scheduledCourseController.getScheduledCourses);
 router.put('/scheduled-courses', scheduledCourseController.updateScheduledCourse);
 router.delete('/scheduled-courses/:id', scheduledCourseController.deleteScheduledCourse);
 
+// User Profiles
+router.put('/profiles', userProfileController.updateProfile);
+router.get('/profiles/:userId', userProfileController.getProfileByUserId);
+router.get('/counselor-names', userProfileController.getCounselorNames);
+
 // Users
-router.post('/profiles',
+router.post('/register',
     userController.validateUniqueUserId,
-    userController.createProfile);
-router.put('/profiles', userController.updateProfile);
-router.get('/profiles/:userId', userController.getProfileByUserId);
-router.get('/counselor-names', userController.getCounselorNames);
-router.post('/login', userController.login);
+    userController.register,
+    userProfileController.createProfile);
+router.post('/login',
+    userController.login,
+    userProfileController.getProfileByUserId);
+router.get('/logout', userController.logout);
 
 module.exports = router;
 

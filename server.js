@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 const app = express();
 const mongoose = require('mongoose');
 const routes = require('./app/routes');
+const passport = require('./app/auth/passport');
 
 const keyfilesPath = process.env.KEYFILES_PATH;
 const privateKey = fs.readFileSync( path.join(keyfilesPath, 'mbu-server-key.pem'));
@@ -56,6 +57,8 @@ mongoose.connect(mongoUrl, (err) => {
 
     // parse application/json
     app.use(bodyParser.json());
+
+    app.use(passport.initialize());
 
     const imagePath = path.join(__dirname, 'app', 'images');
     app.use(baseUrl + '/images', express.static(imagePath));
