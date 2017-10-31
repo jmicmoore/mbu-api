@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const MeritBadgeModel = require('../models/MeritBadge').MeritBadge;
 const factory = require('../models/modelFactory');
 

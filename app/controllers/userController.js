@@ -57,6 +57,10 @@ module.exports.login = (req, res, next) => {
     passport.authenticate('local', authCallback)(req, res, next);
 };
 
+module.exports.sendUserId = (req, res) => {
+    res.status(200).send({userId: req.user.userId});
+};
+
 module.exports.logout = (req, res) => {
     // the logout method is added to the request object automatically by Passport
     req.logout();

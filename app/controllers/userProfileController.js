@@ -1,4 +1,5 @@
 const _ = require('lodash');
+const mongoose = require('mongoose');
 const UserProfileModel = require('../models/UserProfile');
 
 module.exports.createProfile = (req, res) => {
@@ -41,7 +42,7 @@ module.exports.updateProfile = (req, res) => {
 };
 
 module.exports.getProfileByUserId = (req, res) => {
-    const userId = req.params.userId || req.user.userId;
+    const userId = req.params.userId;
 
     UserProfileModel.findOne({userId: userId}).lean().exec( (err, userProfile) => {
         if(err){

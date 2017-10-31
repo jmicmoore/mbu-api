@@ -7,16 +7,16 @@ const UserProfile = new Schema({
 
     userId: {
         type: String,
+        required: true,
         unique: true
     },
 
-    firstName: String,
-    lastName: String,
-    email: String,
-    profileType: String,
-    council: String,
+    firstName: {type: String, required: true},
+    lastName: {type: String, required: true},
+    profileType: {type: String, required: true},
+    council: {type: String, required: true},
+    district: {type: String, required: true},
     otherCouncil: String,
-    district: String,
     otherDistrict: String,
 
     // instructor shared
@@ -24,6 +24,7 @@ const UserProfile = new Schema({
     maxNumberOfCourses: String,
 
     // counselor specific
+    email: String,
     address: String,
     city: String,
     state: String,
@@ -36,6 +37,16 @@ const UserProfile = new Schema({
 
     // venturer instructor specific
     venturingClasses: [String],
+
+    // control flags
+    basicRegistrationComplete: {
+        type: Boolean,
+        default: false
+    },
+    registrationComplete: {
+        type: Boolean,
+        default: false
+    },
 
     created: {
         type: Date,

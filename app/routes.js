@@ -58,9 +58,7 @@ router.post('/register',
     userController.validateUniqueUserId,
     userController.register,
     userProfileController.createProfile);
-router.post('/login',
-    userController.login,
-    userProfileController.getProfileByUserId);
+router.post('/login', userController.login, userController.sendUserId);
 router.get('/logout', userController.logout);
 
 module.exports = router;
