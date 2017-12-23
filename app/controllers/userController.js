@@ -1,17 +1,18 @@
 const passport = require('passport');
 const UserModel = require('../models/User');
+const log = require('log4js').getLogger('userController');
 
 module.exports.register = (req, res, next) => {
     if (!req.is('application/json')) {
         return res.status(406).send({
             message: 'Only json content is acceptable'
-        })
+        });
     }
 
     const model = new UserModel(req.body);
-    model.save( (err, savedUser) => {
+    model.save( (err) => {
         if (err) {
-            console.error('Error saving user profile ', err);
+            log.error('Error saving user profile ', err);
             return res.status(500).send('Error saving user profile');
         }
         next();
@@ -27,13 +28,13 @@ module.exports.login = (req, res, next) => {
     //     userProfileController.getProfileByUserId);
     // passport.authenticate('local', { successRedirect: '/', failureRedirect: '/login' });
 
-    const authCallback = (err, user, info) => {
+    const authCallback = (err, user) => {
         if(err){
-            console.error('Unexpected error while authenticating', err);
+            log.error('Unexpected error while authenticating', err);
             return next(err);
         }
         if(!user){
-            console.error('User not found while authenticating');
+            log.error('User not found while authenticating');
             return res.status(401).send('Either username or password was incorrect');
         }
 
@@ -47,11 +48,11 @@ module.exports.login = (req, res, next) => {
         // that can be used to establish a login session
         req.logIn(user, loginErr => {
             if(loginErr) {
-                console.error('Unexpected error while calling req.logIn', loginErr);
+                log.error('Unexpected error while calling req.logIn', loginErr);
                 return res.status(401).send('Either username or password was incorrect');
             }
             next();
-        })
+        });
     };
 
     passport.authenticate('local', authCallback)(req, res, next);
@@ -72,7 +73,7 @@ module.exports.validateUniqueUserId = (req, res, next) => {
 
     UserModel.findOne({userId: userId}).lean().exec( (err, user) => {
         if(err){
-            console.log('Error validating unique userId: ', err);
+            log.error('Error validating unique userId: ', err);
             res.status(500).send('Unexpected error');
         } else {
             if(user){

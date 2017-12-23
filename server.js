@@ -5,6 +5,7 @@ const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
+const log4js = require('log4js');
 const mongoose = require('mongoose');
 const routes = require('./app/routes');
 const passport = require('./app/auth/passport');
@@ -28,16 +29,39 @@ const securePort = process.env.SECURE_PORT || 8443;
 const mongoUrl =  process.env.MONGO_URL || 'mongodb://127.0.0.1:27017/mbu-db';
 const baseUrl = '/mbu-api';
 
+const loggingConfig = {
+    appenders : {
+        stdout : {
+            type: 'stdout',
+            layout: {
+                type: 'pattern',
+                pattern: 'log_level="%p" app="%x{app}" app_env="%x{deploymentEnvironment}" category="%c" message="%m"',
+                tokens: {
+                    app: 'MERIT-BADGE-UNIVERSITY-API',
+                    deploymentEnvironment: process.env.NODE_ENV ? process.env.NODE_ENV : 'local'
+                }
+            }
+        }
+    },
+    categories : {
+        default : {appenders: ['stdout'], level: 'info'}
+    },
+    replaceConsole: true
+};
+
+log4js.configure(loggingConfig, {});
+const log = log4js.getLogger('server');
+
 mongoose.connect(mongoUrl, (err) => {
     if (err) {
-        console.error('Error!  Could not connect to MongoDB!', err);
+        log.error('Error!  Could not connect to MongoDB!', err);
         process.exit(0);
     }
 
-    console.log('Connected to Mongo');
+    log.info('Connected to Mongo');
 
     if (process.env.NODE_ENV !== 'production') {
-        console.log('setting up CORS middle-ware');
+        log.info('setting up CORS middle-ware');
         app.use((req, res, next) => {
             res.header('Access-Control-Allow-Headers', 'origin, content-type, accept, Access-Control-Allow-Origin');
             res.header('Access-Control-Allow-Origin', req.header('origin'));
@@ -48,7 +72,7 @@ mongoose.connect(mongoUrl, (err) => {
     }
 
     app.use((req, res, next) => {
-        console.info("userId=" + req.userId + ", Method=" + req.method + ", Request=" + req.protocol + "://" + req.get('host') + req.originalUrl);
+        log.info('userId=' + req.userId + ', Method=' + req.method + ', Request=' + req.protocol + '://' + req.get('host') + req.originalUrl);
         next();
     });
 
@@ -66,6 +90,6 @@ mongoose.connect(mongoUrl, (err) => {
     app.use(baseUrl, routes);
 
     https.createServer(sslOptions, app).listen(securePort, () => {
-        console.log('MBU API listening on port:', securePort);
+        log.info('MBU API listening on port:', securePort);
     });
 });

@@ -1,0 +1,29 @@
+{
+    "env": {
+        "es6": true,
+        "node": true
+    },
+    "parserOptions": {
+        "ecmaFeatures": {
+            "experimentalObjectRestSpread": true
+        },
+        "sourceType": "module"
+    },
+    "extends": "eslint:recommended",
+    "rules": {
+        "space-after-keywords:": "always",
+        "indent": [
+            "error",
+            4
+        ],
+        "linebreak-style": [
+            "error",
+            "unix"
+        ],
+        "quotes": ["error", "single", {"avoidEscape": true, "allowTemplateLiterals": true}],
+        "semi": [
+            "error",
+            "always"
+        ]
+    }
+}

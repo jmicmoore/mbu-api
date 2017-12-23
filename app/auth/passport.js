@@ -10,13 +10,13 @@ const localStrategy = require('./localMongoStrategy');
 // serializing, and querying the user record by ID from the database when
 // deserializing.
 passport.serializeUser((user, done) => {
-    done(null, user.userId)
+    done(null, user.userId);
 });
 
 passport.deserializeUser((userId, done) => {
     UserModel.findOne({userId: userId}).lean().exec((err, user) => {
-        done(err, user)
-    })
+        done(err, user);
+    });
 });
 
 passport.use('local', localStrategy);
