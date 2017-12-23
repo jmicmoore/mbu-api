@@ -23,6 +23,7 @@ router.get('/states', referenceController.getStates);
 // Merit Badges
 router.get('/merit-badge-names', meritBadgeController.getMeritBadgeNames);
 router.get('/merit-badges', meritBadgeController.getAllMeritBadges);
+router.get('/merit-badges/:id', meritBadgeController.getMeritBadgeById);
 router.get('/merit-badges/:name', meritBadgeController.getMeritBadgeByName);
 router.post('/merit-badges', meritBadgeController.createMeritBadge);
 router.put('/merit-badges', meritBadgeController.updateMeritBadge);

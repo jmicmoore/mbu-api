@@ -24,11 +24,22 @@ module.exports.getAllMeritBadges = (req, res) => {
     });
 };
 
+module.exports.getMeritBadgeById = (req, res) => {
+    MeritBadgeModel.findById(req.params.id).lean().exec( (err, meritBadge) => {
+        if(err){
+            console.log('Error getting Merit Badge by id: ', err);
+            res.status(500).send('Error getting Merit Badge by id');
+        } else {
+            res.status(200).send(meritBadge);
+        }
+    });
+};
+
 module.exports.getMeritBadgeByName = (req, res) => {
     MeritBadgeModel.findOne({name: req.params.name}).lean().exec( (err, meritBadge) => {
         if(err){
-            console.log('Error getting Merit Badge: ', err);
-            res.status(500).send('Error getting Merit Badge');
+            console.log('Error getting Merit Badge by name: ', err);
+            res.status(500).send('Error getting Merit Badge by name');
         } else {
             res.status(200).send(meritBadge);
         }
