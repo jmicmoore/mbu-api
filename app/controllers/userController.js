@@ -22,7 +22,7 @@ module.exports.register = (req, res, next) => {
 module.exports.login = (req, res, next) => {
 
     // TODO: try this without the custom callback
-    // delete this method andjust use passport.authenticate on the router directly
+    // delete this method and just use passport.authenticate on the router directly
     // app.post('/login',
     //     passport.authenticate('local'),
     //     userProfileController.getProfileByUserId);
