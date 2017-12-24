@@ -19,6 +19,8 @@ const UserProfile = new Schema({
     otherCouncil: String,
     otherDistrict: String,
 
+    unit: String,
+
     // instructor shared
     timeAvailable: String,
     maxNumberOfCourses: String,
