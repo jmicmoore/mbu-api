@@ -20,4 +20,4 @@ const Classroom = new Schema({
     lastModifiedBy : String,
 });
 
-module.exports = mongoose.model('Classroom', Classroom);
+module.exports = Classroom;

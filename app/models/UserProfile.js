@@ -62,4 +62,4 @@ const UserProfile = new Schema({
     lastModifiedBy : String,
 });
 
-module.exports = mongoose.model('UserProfile', UserProfile);
+module.exports = UserProfile;

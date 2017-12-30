@@ -2,19 +2,7 @@
 
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-
-const SubRequirement = new Schema({
-    part: String,
-    text: String,
-    note: String
-});
-
-const Requirement = new Schema({
-    number: Number,
-    description: String,
-    note: String,
-    subRequirements: [SubRequirement]
-});
+const Requirement = require('./Requirement');
 
 const MeritBadge = new Schema({
 
@@ -36,8 +24,4 @@ const MeritBadge = new Schema({
     lastModifiedBy : String,
 });
 
-// module.exports = mongoose.model('MeritBadge', MeritBadge);
-
-module.exports.MeritBadge = mongoose.model('MeritBadge', MeritBadge);
-module.exports.Requirement = mongoose.model('Requirement', Requirement);
-module.exports.SubRequirement = mongoose.model('SubRequirement', SubRequirement);
+module.exports.MeritBadge = MeritBadge;

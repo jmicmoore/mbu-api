@@ -89,7 +89,12 @@ mongoose.connect(mongoUrl, (err) => {
 
     app.use(baseUrl, routes);
 
-    https.createServer(sslOptions, app).listen(securePort, () => {
-        log.info('MBU API listening on port:', securePort);
+    // TODO: SSL stopped working - certificate probably expired.
+    // See the README to get this working again when you get closer to deployment
+    // https.createServer(sslOptions, app).listen(securePort, () => {
+    //     console.log('MBU API listening on port:', securePort);
+    // });
+    app.listen(port, function() {
+        log.info('MBU mock API listening on port:', port);
     });
 });

@@ -1,4 +1,4 @@
-const ClassroomModel = require('../models/Classroom');
+const ClassroomModel = require('../models/models').ClassroomModel;
 const log = require('log4js').getLogger('classroomController');
 
 module.exports.getAllClassrooms = (req, res) => {

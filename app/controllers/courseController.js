@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const CourseModel = require('../models/Course');
+const CourseModel = require('../models/models').CourseModel;
 const log = require('log4js').getLogger('courseController');
 
 module.exports.getCourses = (req, res) => {

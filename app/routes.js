@@ -8,6 +8,9 @@ const scheduledCourseController = require('./controllers/scheduledCourseControll
 const userProfileController = require('./controllers/userProfileController');
 const userController = require('./controllers/userController');
 const venturingController = require('./controllers/venturingController');
+
+const studentController = require('./controllers/studentController');
+
 const packageJson = require('../package.json');
 
 router.get('/version', (req, res) => {
@@ -61,6 +64,12 @@ router.post('/register',
     userProfileController.createProfile);
 router.post('/login', userController.login, userController.sendUserId);
 router.get('/logout', userController.logout);
+
+// Students
+router.get('/students/:id', studentController.getStudentById);
+router.get('/students', studentController.getStudents);
+router.put('/students', studentController.updateStudent);
+router.delete('/students/:id', studentController.deleteStudent);
 
 module.exports = router;
 

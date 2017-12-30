@@ -27,4 +27,4 @@ const ScheduledCourse = new Schema({
     lastModifiedBy : String,
 });
 
-module.exports = mongoose.model('ScheduledCourse', ScheduledCourse);
+module.exports = ScheduledCourse;

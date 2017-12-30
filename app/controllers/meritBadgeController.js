@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const MeritBadgeModel = require('../models/MeritBadge').MeritBadge;
+const MeritBadgeModel = require('../models/models').MeritBadgeModel;
 const factory = require('../models/modelFactory');
 const log = require('log4js').getLogger('meritBadgeController');
 

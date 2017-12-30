@@ -35,4 +35,4 @@ const Course = new Schema({
     lastModifiedBy : String,
 });
 
-module.exports = mongoose.model('Course', Course);
+module.exports = Course;
