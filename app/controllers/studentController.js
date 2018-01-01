@@ -3,7 +3,7 @@ const StudentModel = require('../models/models').StudentModel;
 const log = require('log4js').getLogger('studentController');
 
 module.exports.getStudents = (req, res) => {
-    StudentModel.find({}).lean().exec( (err, students) => {
+    StudentModel.find({}).populate('courses').lean().exec( (err, students) => {
         if(err){
             log.error('Error getting students: ', err);
             res.status(500).send('Error getting students');
@@ -15,7 +15,7 @@ module.exports.getStudents = (req, res) => {
 
 module.exports.getStudentById = (req, res) => {
     const studentId = req.params.id;
-    StudentModel.findById(studentId).lean().exec( (err, student) => {
+    StudentModel.findById(studentId).populate('courses').lean().exec( (err, student) => {
         if(err){
             log.error('Error getting student by id: ', err);
             res.status(500).send('Error getting student by id');
