@@ -22,7 +22,7 @@ const Student = new Schema({
     leaderUnit: String,
     courses: [{ type: Schema.Types.ObjectId, ref: 'ScheduledCourse' }],
 
-    // TODO: add concept of completed requirements for merit badges
+    signedIn: Boolean,
 
     created: {
         type: Date,
