@@ -5,6 +5,7 @@ const meritBadgeController = require('./controllers/meritBadgeController');
 const classroomController = require('./controllers/classroomController');
 const courseController = require('./controllers/courseController');
 const scheduledCourseController = require('./controllers/scheduledCourseController');
+const registeredCourseController = require('./controllers/registeredCourseController');
 const userProfileController = require('./controllers/userProfileController');
 const userController = require('./controllers/userController');
 const venturingController = require('./controllers/venturingController');
@@ -51,6 +52,12 @@ router.get('/scheduled-courses/:id', scheduledCourseController.getScheduledCours
 router.get('/scheduled-courses', scheduledCourseController.getScheduledCourses);
 router.put('/scheduled-courses', scheduledCourseController.updateScheduledCourse);
 router.delete('/scheduled-courses/:id', scheduledCourseController.deleteScheduledCourse);
+
+// Registered Courses
+router.get('/registered-courses/:id', registeredCourseController.getRegisteredCourseById);
+router.get('/registered-courses', registeredCourseController.getRegisteredCourses);
+router.put('/registered-courses', registeredCourseController.updateRegisteredCourse);
+router.delete('/registered-courses/:id', registeredCourseController.deleteRegisteredCourse);
 
 // User Profiles
 router.put('/profiles', userProfileController.updateProfile);
