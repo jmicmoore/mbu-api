@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const StudentModel = require('../models/models').StudentModel;
+const StudentModel = require('../models/models').Student;
 const log = require('log4js').getLogger('studentController');
 
 module.exports.getStudents = (req, res) => {

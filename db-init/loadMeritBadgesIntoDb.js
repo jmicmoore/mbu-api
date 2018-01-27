@@ -2,7 +2,7 @@ const _ = require('lodash');
 const async = require('async');
 const mongoose = require('mongoose');
 const factory = require('../app/models/modelFactory');
-const MeritBadgeModel = require('../app/models/MeritBadge').MeritBadge;
+const MeritBadgeModel = require('../app/models/models').MeritBadge;
 const autoParsedMeritBadges = require('./meritBadges.json');
 
 const architecture = require('./problemBadges/Architecture.json');

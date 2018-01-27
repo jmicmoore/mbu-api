@@ -1,5 +1,5 @@
 const passport = require('passport');
-const UserModel = require('../models/models').UserModel;
+const UserModel = require('../models/models').User;
 const log = require('log4js').getLogger('userController');
 
 module.exports.register = (req, res, next) => {

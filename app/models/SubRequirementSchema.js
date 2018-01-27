@@ -9,4 +9,4 @@ const SubRequirement = new Schema({
     note: String
 });
 
-module.exports.SubRequirement = SubRequirement;
+module.exports = SubRequirement;

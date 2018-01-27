@@ -2,13 +2,13 @@
 
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const SubRequirement = require('./SubRequirement');
+const SubRequirementSchema = require('./SubRequirementSchema');
 
 const Requirement = new Schema({
     number: Number,
     description: String,
     note: String,
-    subRequirements: [SubRequirement]
+    subRequirements: [SubRequirementSchema]
 });
 
-module.exports.Requirement = Requirement;
+module.exports = Requirement;

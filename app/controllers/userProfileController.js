@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const UserProfileModel = require('../models/models').UserProfileModel;
+const UserProfileModel = require('../models/models').UserProfile;
 const log = require('log4js').getLogger('userProfileController');
 
 module.exports.createProfile = (req, res) => {

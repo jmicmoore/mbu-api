@@ -1,5 +1,5 @@
 const passport = require('passport');
-const UserModel = require('../models/User');
+const UserModel = require('../models/models').User;
 const localStrategy = require('./localMongoStrategy');
 
 // Configure Passport authenticated session persistence.

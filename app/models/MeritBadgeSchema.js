@@ -2,7 +2,7 @@
 
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const Requirement = require('./Requirement');
+const RequirementSchema = require('./RequirementSchema');
 
 const MeritBadge = new Schema({
 
@@ -10,7 +10,7 @@ const MeritBadge = new Schema({
     eagleRequired: Boolean,
     imageUrl: String,
     originalImageUrl: String,
-    requirements: [Requirement],
+    requirements: [RequirementSchema],
 
     created: {
         type: Date,
@@ -24,4 +24,4 @@ const MeritBadge = new Schema({
     lastModifiedBy : String,
 });
 
-module.exports.MeritBadge = MeritBadge;
+module.exports = MeritBadge;

@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const RegisteredCourseModel = require('../models/models').RegisteredCourseModel;
+const RegisteredCourseModel = require('../models/models').RegisteredCourse;
 const log = require('log4js').getLogger('completedCourseController');
 
 module.exports.getRegisteredCourses = (req, res) => {

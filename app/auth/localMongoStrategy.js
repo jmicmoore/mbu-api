@@ -1,5 +1,5 @@
 const LocalStrategy = require('passport-local').Strategy;
-const UserModel = require('../models/User');
+const UserModel = require('../models/models').User;
 const passwordUtil = require('./passwordUtil');
 const log = require('log4js').getLogger('localMongoStrategy');
 
@@ -17,7 +17,7 @@ module.exports = new LocalStrategy(options, (userId, password, done) => {
         }
         if(!user){
             log.error('UserId "' + userId + '" was not found.');
-            return done(null, false, {message: 'Invalid email or password'})
+            return done(null, false, {message: 'Invalid email or password'});
         }
         passwordUtil.compare(password, user.password, (err, match) => {
             if(err){
