@@ -1,7 +1,7 @@
 const _ = require('lodash');
-const MeritBadgeModel = require('./MeritBadge');
-const RequirementModel = require('./Requirement');
-const SubRequirementModel = require('./SubRequirement');
+const MeritBadgeModel = require('./models').MeritBadge;
+const RequirementModel = require('./models').Requirement;
+const SubRequirementModel = require('./models').SubRequirement;
 
 module.exports.createMeritBadgeModel = (meritBadge) => {
     const meritBadgeModel = new MeritBadgeModel(meritBadge);
